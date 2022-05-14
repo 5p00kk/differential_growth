@@ -1,0 +1,2 @@
+add_executable(diffgrowth_app main.cpp)
+target_link_libraries(diffgrowth_app LINK_PUBLIC diffgrowth_lib)
