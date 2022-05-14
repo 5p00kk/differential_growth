@@ -1,9 +1,20 @@
+/* 
+TODO
+
+*/
 #include "node.h"
 #include <vector>
+
+#include <memory>
+
+namespace dg
+{
 
 class c_path
 {
 public:
+    void add_node(c_node node);
+
     /* Get point count */
     inline size_t kdtree_get_point_count() const { return m_nodes.size(); }
 
@@ -25,3 +36,5 @@ public:
 
     std::vector<c_node> m_nodes;
 };
+
+}

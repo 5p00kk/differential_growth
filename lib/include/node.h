@@ -1,11 +1,19 @@
+namespace dg
+{
+
+struct pt2
+{
+    double x, y;
+};
+
 class c_node
 {
-    struct pt2
-    {
-        double x, y;
-    };
+    void update_position();
 public:
     c_node* p_node;
     c_node* n_node;
-    pt2 pos;
+    pt2 curr_pos;
+    pt2 next_pos;
 };
+
+}
