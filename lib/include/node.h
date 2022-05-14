@@ -4,8 +4,6 @@ class c_node
     {
         double x, y;
     };
-
-    c_node();
 public:
     c_node* p_node;
     c_node* n_node;
