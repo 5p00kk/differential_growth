@@ -2,9 +2,9 @@
 TODO
 
 */
+#pragma once
 #include "node.h"
 #include <vector>
-
 #include <memory>
 
 namespace dg
