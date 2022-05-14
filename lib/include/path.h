@@ -13,6 +13,7 @@ namespace dg
 class c_path
 {
 public:
+    c_path();
     void add_node(c_node node);
 
     /* Get point count */
