@@ -25,9 +25,9 @@ public:
     inline double kdtree_get_pt(const size_t idx, const size_t dim) const
     {
         if (dim == 0)
-            return m_nodes[idx].pos.x;
+            return m_nodes[idx].curr_pos.x;
         else
-            return m_nodes[idx].pos.y;
+            return m_nodes[idx].curr_pos.y;
     }
 
     /* Optional bounding-box computation */
