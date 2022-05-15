@@ -25,6 +25,7 @@ void dg::c_path::add_node(std::shared_ptr<c_node> node)
 
 void dg::c_path::print_path() const
 {
+    printf("\nPATH IS:\n");
     if(m_first_node != nullptr)
     {
         std::shared_ptr<c_node> curr_node = m_first_node;
