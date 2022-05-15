@@ -1,5 +1,6 @@
 #include "path.h"
 #include <stdio.h>
+#include <random>
 
 dg::c_path::c_path()
 {
@@ -38,3 +39,25 @@ void dg::c_path::print_path() const
         printf("No nodes!\n");
     }
 }
+
+void dg::c_path::apply_brownian()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::normal_distribution<double> dis(0.0, 1.0);
+    const double scale = 1.0;
+
+    if(m_first_node == nullptr)
+    {
+        return;
+    }
+
+    std::shared_ptr<c_node> curr_node = m_first_node;
+    while(curr_node != nullptr)
+    {
+        curr_node->next_pos.x = curr_node->curr_pos.x + dis(gen);
+        curr_node->next_pos.y = curr_node->curr_pos.y + dis(gen);
+        curr_node = curr_node->n_node.lock();
+    }
+}
+
