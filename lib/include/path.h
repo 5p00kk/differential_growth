@@ -30,10 +30,13 @@ public:
         else
             return m_nodes[idx]->curr_pos.y;
     }
-
-    /* Optional bounding-box computation */
     template <class BBOX>
     bool kdtree_get_bbox(BBOX& /* bb */) const {return false;}
+
+    std::vector<std::shared_ptr<c_node>> m_nodes;
+    std::shared_ptr<c_node> m_last_node = nullptr;
+    std::shared_ptr<c_node> m_first_node = nullptr;
+private:
 };
 
 }
