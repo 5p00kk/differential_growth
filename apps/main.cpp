@@ -19,6 +19,14 @@ int main(int argc, char const *argv[])
     printf("added %ld nodes\n", path.kdtree_get_point_count());
     path.print_path();
 
+    
+    path.apply_brownian();
+    printf("Applied brownian\n");
+    path.update_path();
+    printf("Updated path\n");
+    path.print_path();
+    printf("The end\n");
+
     cv::Mat output_image;
     visualizer.visualize(path.m_first_node, output_image);
 
