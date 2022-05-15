@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 namespace dg
 {
 
@@ -10,10 +12,11 @@ struct pt2
 
 class c_node
 {
-    void update_position();
 public:
-    c_node* p_node;
-    c_node* n_node;
+    c_node(double x, double y);
+    void update_position();
+    std::weak_ptr<c_node> p_node;
+    std::weak_ptr<c_node> n_node;
     pt2 curr_pos;
     pt2 next_pos;
 };

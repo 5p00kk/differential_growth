@@ -14,7 +14,12 @@ class c_path
 {
 public:
     c_path();
-    void add_node(c_node node);
+    void add_node(std::shared_ptr<c_node> node);
+    void print_path() const;
+    std::vector<std::shared_ptr<c_node>> m_nodes;
+    std::shared_ptr<c_node> m_last_node = nullptr;
+    std::shared_ptr<c_node> m_first_node = nullptr;
+
 
     /* Get point count */
     inline size_t kdtree_get_point_count() const { return m_nodes.size(); }
@@ -26,16 +31,14 @@ public:
     inline double kdtree_get_pt(const size_t idx, const size_t dim) const
     {
         if (dim == 0)
-            return m_nodes[idx].curr_pos.x;
+            return m_nodes[idx]->curr_pos.x;
         else
-            return m_nodes[idx].curr_pos.y;
+            return m_nodes[idx]->curr_pos.y;
     }
 
     /* Optional bounding-box computation */
     template <class BBOX>
     bool kdtree_get_bbox(BBOX& /* bb */) const {return false;}
-
-    std::vector<c_node> m_nodes;
 };
 
 }
