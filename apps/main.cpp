@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "nanoflann.hpp"
 #include "node.h"
 #include "path.h"
 
