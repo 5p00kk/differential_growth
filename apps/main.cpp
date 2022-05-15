@@ -22,14 +22,17 @@ int main(int argc, char const *argv[])
 
 
     cv::Mat output_image;
+    cv::Mat cumulative = cv::Mat::zeros(900, 900, CV_8UC1);
+
     for(int step=0; step<1000; step++)    
     {
-        
         path.apply_brownian();
         path.update_path();
         path.print_path();
         visualizer.visualize(path.m_first_node, output_image);
+        cumulative = (output_image/255)+cumulative;
         cv::imshow("output", output_image);
+        cv::imshow("cumulative", cumulative);
         cv::waitKey(10);
     }
 
