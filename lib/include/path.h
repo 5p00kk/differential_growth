@@ -10,6 +10,9 @@ TODO
 namespace dg
 {
 
+class c_path;
+using my_kd_tree_t = nanoflann::KDTreeSingleIndexAdaptor<nanoflann::L2_Simple_Adaptor<double, dg::c_path>, dg::c_path, 2>;
+
 class c_path
 {
 public:
@@ -35,6 +38,7 @@ public:
     std::vector<std::shared_ptr<c_node>> m_nodes;
     std::shared_ptr<c_node> m_last_node = nullptr;
     std::shared_ptr<c_node> m_first_node = nullptr;
+    my_kd_tree_t m_search_index;
 private:
 };
 

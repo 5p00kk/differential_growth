@@ -4,6 +4,7 @@
 #include <random>
 
 dg::c_path::c_path()
+: m_search_index{2, *this, {10}}
 {
     m_nodes.reserve(1000);
 }
