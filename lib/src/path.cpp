@@ -46,7 +46,7 @@ void dg::c_path::apply_brownian()
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::normal_distribution<double> dis(0.0, 1.0);
+    std::normal_distribution<double> dis(0.0, 0.5);
     const double scale = 1.0;
 
     if(m_first_node == nullptr)
