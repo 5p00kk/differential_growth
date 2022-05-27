@@ -22,6 +22,7 @@ public:
     void apply_brownian();
     void apply_split(double split_distance);
     void apply_attraction(double min_distance, double interpol);
+    void apply_repulsion(double repulsion_distance, double interpol);
     void update_path();
     /* KD-tree required functions */
     inline size_t kdtree_get_point_count() const { return m_nodes.size(); }
