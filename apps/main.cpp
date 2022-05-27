@@ -20,22 +20,21 @@ int main(int argc, char const *argv[])
     printf("added %ld nodes\n", path.kdtree_get_point_count());
     path.print_path();
 
-
     cv::Mat output_image;
     cv::Mat cumulative = cv::Mat::zeros(900, 900, CV_8UC1);
 
-    for(int step=0; step<1000; step++)    
+    for(int step=0; step<10000; step++)    
     {
         path.apply_brownian();
-        path.apply_attraction(25.0, 0.1);
+        path.apply_attraction(2.0, 0.2);
+        path.apply_repulsion(15.0, 0.1);
         path.update_path();
-        path.apply_split(50.0);
-        path.print_path();
+        path.apply_split(10.0);
+        //path.print_path();
         visualizer.visualize(path.m_first_node, output_image);
         cumulative = (output_image/255)+cumulative;
-        cv::imshow("output", output_image);
         cv::imshow("cumulative", cumulative);
-        cv::waitKey(10);
+        cv::imshow("output", output_image);
     }
 
     return 0;
