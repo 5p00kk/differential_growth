@@ -56,8 +56,8 @@ void dg::c_path::apply_brownian()
     std::shared_ptr<c_node> curr_node = m_first_node;
     while(curr_node != nullptr)
     {
-        curr_node->next_pos.x = curr_node->curr_pos.x + dis(gen);
-        curr_node->next_pos.y = curr_node->curr_pos.y + dis(gen);
+        curr_node->next_pos.x += dis(gen);
+        curr_node->next_pos.y += dis(gen);
         curr_node = curr_node->n_node.lock();
     }
 }

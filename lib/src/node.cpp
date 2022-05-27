@@ -4,6 +4,8 @@ dg::c_node::c_node(double x, double y)
 {
     curr_pos.x = x;
     curr_pos.y = y;
+    next_pos.x = x;
+    next_pos.y = y;
 }
 
 void dg::c_node::update_position()
