@@ -128,6 +128,32 @@ void dg::c_path::apply_attraction(double min_distance, double interpol)
             }
         }
 
+        if(next_node == nullptr)
+        {
+            break;
+        }
+
+        /* Get next trio */
+        prev_node = curr_node;
+        curr_node = next_node;
+        next_node = next_node->n_node.lock();
+    }
+}
+
+
+void dg::c_path::apply_alignment(double aligment_force)
+{
+    if(m_first_node == nullptr)
+    {
+        return;
+    }
+    
+    std::shared_ptr<c_node> prev_node = nullptr;
+    std::shared_ptr<c_node> curr_node = m_first_node;
+    std::shared_ptr<c_node> next_node = curr_node->n_node.lock();
+
+    while(curr_node != nullptr)
+    {
         /* Apply aligment "force" */
         if(prev_node != nullptr && next_node != nullptr)
         {
@@ -145,10 +171,9 @@ void dg::c_path::apply_attraction(double min_distance, double interpol)
         /* Get next trio */
         prev_node = curr_node;
         curr_node = next_node;
-        next_node = next_node->n_node.lock();;
+        next_node = next_node->n_node.lock();
     }
 }
-
 
 void dg::c_path::apply_repulsion(double repulsion_distance, double interpol)
 {
