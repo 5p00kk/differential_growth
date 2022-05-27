@@ -27,6 +27,7 @@ int main(int argc, char const *argv[])
     for(int step=0; step<1000; step++)    
     {
         path.apply_brownian();
+        path.apply_attraction(25.0, 0.1);
         path.update_path();
         path.apply_split(50.0);
         path.print_path();
