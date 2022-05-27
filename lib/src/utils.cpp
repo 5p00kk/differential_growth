@@ -21,3 +21,11 @@ dg::pt2 dg::lerp(dg::pt2 first, dg::pt2 second, double t)
     retval.y = first.y + (second.y - first.y) * t;
     return retval;
 }
+
+dg::pt2 dg::lerp_diff(dg::pt2 first, dg::pt2 second, double t)
+{
+    dg::pt2 retval{};
+    retval.x = (second.x - first.x) * t;
+    retval.y = (second.y - first.y) * t;
+    return retval;
+}
