@@ -22,7 +22,7 @@ dg::pt2 dg::pts_midpoint(const dg::pt2& first, const dg::pt2& second)
     return midpoint;
 }
 
-dg::pt2 dg::lerp(dg::pt2 first, dg::pt2 second, double t)
+dg::pt2 dg::lerp(const dg::pt2& first, const dg::pt2& second, double t)
 {
     dg::pt2 retval{};
     retval.x = first.x + (second.x - first.x) * t;
@@ -30,10 +30,22 @@ dg::pt2 dg::lerp(dg::pt2 first, dg::pt2 second, double t)
     return retval;
 }
 
-dg::pt2 dg::lerp_diff(dg::pt2 first, dg::pt2 second, double t)
+dg::pt2 dg::lerp_diff(const dg::pt2& first, const dg::pt2& second, double t)
 {
     dg::pt2 retval{};
     retval.x = (second.x - first.x) * t;
     retval.y = (second.y - first.y) * t;
+    return retval;
+}
+
+dg::pt2 dg::get_force(const dg::pt2& first, const dg::pt2& second, double zero_point)
+{
+    double distance = sqrt(pow(first.x - second.x,2)+pow(first.y - second.y,2));
+    double lj_force = pow(zero_point/distance, 12) - pow(zero_point/distance, 6);
+
+    dg::pt2 retval{};
+    retval.x = ((second.x - first.x) / distance)*lj_force;
+    retval.y = ((second.y - first.y) / distance)*lj_force;
+
     return retval;
 }
