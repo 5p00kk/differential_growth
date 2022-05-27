@@ -1,6 +1,7 @@
 find_package(OpenCV REQUIRED)
 
 add_library(diffgrowth_lib
+    src/utils.cpp
     src/node.cpp
     src/path.cpp
     src/visualizer.cpp
