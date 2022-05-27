@@ -26,11 +26,13 @@ int main(int argc, char const *argv[])
     for(int step=0; step<10000; step++)    
     {
         path.apply_brownian();
-        path.apply_attraction(2.0, 0.2);
-        path.apply_repulsion(15.0, 0.1);
+        path.apply_attraction(4.0, 0.1);
+        path.apply_repulsion(10.0, 0.6);
         path.update_path();
+        path.apply_pruning(4.0);
         path.apply_split(10.0);
         //path.print_path();
+        printf("Path contains %d nodes\n", (int)path.m_nodes.size());
         visualizer.visualize(path.m_first_node, output_image);
         cumulative = (output_image/255)+cumulative;
         cv::imshow("cumulative", cumulative);
