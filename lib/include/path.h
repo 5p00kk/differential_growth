@@ -17,6 +17,7 @@ public:
     void add_node(std::shared_ptr<c_node> node);
     void print_path() const;
     void apply_brownian();
+    void apply_split();
     void update_path();
     /* KD-tree required functions */
     inline size_t kdtree_get_point_count() const { return m_nodes.size(); }

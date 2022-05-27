@@ -1,4 +1,5 @@
 #include "path.h"
+#include "utils.h"
 #include <stdio.h>
 #include <random>
 
@@ -61,6 +62,36 @@ void dg::c_path::apply_brownian()
         curr_node = curr_node->n_node.lock();
     }
 }
+
+
+void dg::c_path::apply_split()
+{
+    if(m_first_node == nullptr)
+    {
+        return;
+    }
+
+    std::shared_ptr<c_node> node_1 = m_first_node;
+    std::shared_ptr<c_node> node_2 = node_1->n_node.lock();;
+    while(node_1 != nullptr && node_2 != nullptr)
+    {
+        if(dg::node_distance(*node_1, *node_2) > 10.0)
+        {
+            dg::pt2 midpoint = dg::nodes_midpoint(*node_1, *node_2);
+            auto node = std::make_shared<dg::c_node>(midpoint.x, midpoint.y);
+            /* Insert the node in between */
+            m_nodes.push_back(node);
+            node->p_node = node_1;
+            node->n_node = node_2;
+            node_1->n_node = node;
+            node_2->p_node = node;
+        }
+        /* Get next pair */
+        node_1 = node_2;
+        node_2 = node_2->n_node.lock();;
+    }
+}
+
 
 void dg::c_path::update_path()
 {
