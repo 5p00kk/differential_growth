@@ -13,3 +13,11 @@ dg::pt2 dg::nodes_midpoint(const c_node& first, const c_node& second)
     midpoint.y = std::min(first.curr_pos.y, second.curr_pos.y) + abs(first.curr_pos.y - second.curr_pos.y)/2;
     return midpoint;
 }
+
+dg::pt2 dg::lerp(dg::pt2 first, dg::pt2 second, double t)
+{
+    dg::pt2 retval{};
+    retval.x = first.x + (second.x - first.x) * t;
+    retval.y = first.y + (second.y - first.y) * t;
+    return retval;
+}
