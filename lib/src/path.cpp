@@ -201,6 +201,12 @@ void dg::c_path::apply_repulsion(double repulsion_distance, double interpol)
             if(m_nodes[match_idx] == curr_node)
                 continue;
             
+            curr_node->next_pos = dg::lerp(curr_node->next_pos, m_nodes[match_idx]->curr_pos, -1.0*interpol);
+        }
+
+        curr_node = curr_node->n_node.lock();
+    }
+}
 
 void dg::c_path::apply_attraction_repulsion(double att_rep_crossing, double low_thresh, double high_thresh)
 {
