@@ -132,7 +132,7 @@ void dg::c_path::apply_attraction(double min_distance, double interpol)
         if(prev_node != nullptr && next_node != nullptr)
         {
             dg::pt2 midpoint = dg::nodes_midpoint(*prev_node, *next_node);
-            dg::pt2 attraction = dg::lerp_diff(curr_node->curr_pos, midpoint, interpol);
+            dg::pt2 attraction = dg::lerp_diff(curr_node->curr_pos, midpoint, 0.55);
             curr_node->next_pos.x += attraction.x;
             curr_node->next_pos.y += attraction.y;
         }
