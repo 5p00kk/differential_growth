@@ -128,7 +128,14 @@ void dg::c_path::apply_attraction(double min_distance, double interpol)
             }
         }
 
-
+        /* Apply aligment "force" */
+        if(prev_node != nullptr && next_node != nullptr)
+        {
+            dg::pt2 midpoint = dg::nodes_midpoint(*prev_node, *next_node);
+            dg::pt2 attraction = dg::lerp_diff(curr_node->curr_pos, midpoint, interpol);
+            curr_node->next_pos.x += attraction.x;
+            curr_node->next_pos.y += attraction.y;
+        }
 
         if(next_node == nullptr)
         {
