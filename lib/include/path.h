@@ -22,6 +22,7 @@ public:
     void apply_brownian();
     void apply_split(double split_distance);
     void apply_attraction(double min_distance, double interpol);
+    void apply_attraction_repulsion(double att_rep_crossing, double low_thresh, double high_thresh);
     void apply_alignment(double aligment_force);
     void apply_pruning(double min_distance);
     void apply_repulsion(double repulsion_distance, double interpol);
