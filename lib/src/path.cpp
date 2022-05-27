@@ -185,6 +185,50 @@ void dg::c_path::apply_repulsion(double repulsion_distance, double interpol)
     }
 }
 
+void dg::c_path::apply_pruning(double min_distance)
+{
+    for(auto it = m_nodes.begin(); it != m_nodes.end();)
+    {
+        bool flag_remove = false;
+
+        std::shared_ptr<c_node> curr_node = *it;
+        std::shared_ptr<c_node> next_node = curr_node->n_node.lock();
+        std::shared_ptr<c_node> prev_node = curr_node->p_node.lock();
+
+        if(prev_node != nullptr && dg::node_distance(*curr_node, *prev_node) < min_distance)
+        {
+            flag_remove = true;
+        }
+
+        if(next_node != nullptr && dg::node_distance(*curr_node, *next_node) < min_distance)
+        {
+            flag_remove = true;
+        }
+
+        if(flag_remove)
+        {
+            if(prev_node == nullptr)
+            {
+                next_node->p_node = curr_node->p_node;
+            }
+            else if(next_node == nullptr)
+            {
+                prev_node->n_node = curr_node->n_node;
+            }
+            else
+            {
+                prev_node->n_node = curr_node->n_node;
+                next_node->p_node = curr_node->p_node;
+            }
+            it = m_nodes.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+
 
 void dg::c_path::update_path()
 {
