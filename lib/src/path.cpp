@@ -92,6 +92,48 @@ void dg::c_path::apply_split(double split_distance)
     }
 }
 
+void dg::c_path::apply_attraction(double min_distance, double interpol)
+{
+    if(m_first_node == nullptr)
+    {
+        return;
+    }
+
+    std::shared_ptr<c_node> prev_node = nullptr;
+    std::shared_ptr<c_node> curr_node = m_first_node;
+    std::shared_ptr<c_node> next_node = curr_node->n_node.lock();
+    while(curr_node != nullptr)
+    {
+        /* 
+            This interpolation here is not how it should be DONE, but I saw it in another implemntation
+            Leave it as it is for now, fix later if results are bad
+        */
+        if(prev_node != nullptr)
+        {
+            if(dg::node_distance(*prev_node, *curr_node) > min_distance)
+            {
+                curr_node->next_pos = dg::lerp(curr_node->next_pos, prev_node->next_pos, interpol);
+            }
+        }
+        if(next_node != nullptr)
+        {
+            if(dg::node_distance(*next_node, *curr_node) > min_distance)
+            {
+                curr_node->next_pos = dg::lerp(curr_node->next_pos, next_node->next_pos, interpol);
+            }
+        }
+
+        if(next_node == nullptr)
+        {
+            break;
+        }
+
+        /* Get next trio */
+        prev_node = curr_node;
+        curr_node = next_node;
+        next_node = next_node->n_node.lock();;
+    }
+}
 
 void dg::c_path::update_path()
 {
