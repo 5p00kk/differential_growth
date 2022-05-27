@@ -28,6 +28,7 @@ int main(int argc, char const *argv[])
     {
         path.apply_brownian();
         path.update_path();
+        path.apply_split(50.0);
         path.print_path();
         visualizer.visualize(path.m_first_node, output_image);
         cumulative = (output_image/255)+cumulative;

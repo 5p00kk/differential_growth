@@ -64,7 +64,7 @@ void dg::c_path::apply_brownian()
 }
 
 
-void dg::c_path::apply_split()
+void dg::c_path::apply_split(double split_distance)
 {
     if(m_first_node == nullptr)
     {
@@ -75,7 +75,7 @@ void dg::c_path::apply_split()
     std::shared_ptr<c_node> node_2 = node_1->n_node.lock();;
     while(node_1 != nullptr && node_2 != nullptr)
     {
-        if(dg::node_distance(*node_1, *node_2) > 100.0)
+        if(dg::node_distance(*node_1, *node_2) > split_distance)
         {
             dg::pt2 midpoint = dg::nodes_midpoint(*node_1, *node_2);
             auto node = std::make_shared<dg::c_node>(midpoint.x, midpoint.y);
