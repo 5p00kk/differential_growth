@@ -78,7 +78,7 @@ void dg::c_path::apply_split(double split_distance)
     {
         if(dg::node_distance(*node_1, *node_2) > split_distance)
         {
-            dg::pt2 midpoint = dg::nodes_midpoint(*node_1, *node_2);
+            dg::pt2 midpoint = dg::pts_midpoint(node_1->curr_pos, node_2->curr_pos);
             auto node = std::make_shared<dg::c_node>(midpoint.x, midpoint.y);
             /* Insert the node in between */
             m_nodes.push_back(node);
