@@ -113,16 +113,22 @@ void dg::c_path::apply_attraction(double min_distance, double interpol)
         {
             if(dg::node_distance(*prev_node, *curr_node) > min_distance)
             {
-                curr_node->next_pos = dg::lerp(curr_node->next_pos, prev_node->next_pos, interpol);
+                dg::pt2 repulsion = dg::lerp_diff(curr_node->curr_pos, prev_node->curr_pos, interpol);
+                curr_node->next_pos.x += repulsion.x;
+                curr_node->next_pos.y += repulsion.y;
             }
         }
         if(next_node != nullptr)
         {
             if(dg::node_distance(*next_node, *curr_node) > min_distance)
             {
-                curr_node->next_pos = dg::lerp(curr_node->next_pos, next_node->next_pos, interpol);
+                dg::pt2 repulsion = dg::lerp_diff(curr_node->curr_pos, next_node->curr_pos, interpol);
+                curr_node->next_pos.x += repulsion.x;
+                curr_node->next_pos.y += repulsion.y;
             }
         }
+
+
 
         if(next_node == nullptr)
         {
