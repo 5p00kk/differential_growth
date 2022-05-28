@@ -49,5 +49,8 @@ int main(int argc, char const *argv[])
         cv::waitKey(1);
     }
 
+    cv::imwrite("cumulative.png", cumulative);
+    cv::imwrite("output.png", output_image);
+
     return 0;
 }
