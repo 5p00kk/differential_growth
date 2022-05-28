@@ -190,6 +190,11 @@ void dg::c_path::apply_pruning(double min_distance)
 
         if(flag_remove)
         {
+            if(curr_node == m_first_node)
+            {
+                m_first_node = next_node;
+            }
+
             if(prev_node == nullptr)
             {
                 next_node->p_node = curr_node->p_node;
