@@ -159,7 +159,7 @@ void dg::c_path::apply_attraction_repulsion(double att_rep_crossing, double low_
             if(sqrt(ret_matches[i].second) > high_thresh)
                 continue;
 
-            dg::pt2 force = dg::get_force(curr_node->next_pos, m_nodes[match_idx]->curr_pos, att_rep_crossing);
+            dg::pt2 force = dg::get_force(curr_node->curr_pos, m_nodes[match_idx]->curr_pos, att_rep_crossing);
             curr_node->next_pos.x += force.x;
             curr_node->next_pos.y += force.y;
         }
