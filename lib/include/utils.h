@@ -10,4 +10,5 @@ dg::pt2 pts_midpoint(const dg::pt2& first, const dg::pt2& second);
 dg::pt2 lerp(const dg::pt2& first, const dg::pt2& second, double t);
 dg::pt2 lerp_diff(const dg::pt2& first, const dg::pt2& second, double t);
 dg::pt2 get_force(const dg::pt2& first, const dg::pt2& second, double zero_point);
+dg::pt2 get_force_dir(const dg::pt2& first, const dg::pt2& second);
 }
