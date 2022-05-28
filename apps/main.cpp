@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
         /* Path operations */
         path.apply_brownian(0.1);
         path.apply_attraction_repulsion(zero_cross, lower_force_radius, upper_force_radius);
-        //path.apply_alignment(0.9);
+        path.apply_alignment(0.01);
         path.update_path();
         path.apply_split(split_length);
         path.apply_pruning(pruning_radius);
