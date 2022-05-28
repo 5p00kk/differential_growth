@@ -43,12 +43,11 @@ void dg::c_path::print_path() const
     }
 }
 
-void dg::c_path::apply_brownian()
+void dg::c_path::apply_brownian(double scale)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::normal_distribution<double> dis(0.0, 0.5);
-    const double scale = 1.0;
+    std::normal_distribution<double> dis(0.0, 0.1);
 
     if(m_first_node == nullptr)
     {
@@ -58,8 +57,8 @@ void dg::c_path::apply_brownian()
     std::shared_ptr<c_node> curr_node = m_first_node;
     while(curr_node != nullptr)
     {
-        curr_node->next_pos.x += dis(gen);
-        curr_node->next_pos.y += dis(gen);
+        curr_node->next_pos.x += scale * dis(gen);
+        curr_node->next_pos.y += scale * dis(gen);
         curr_node = curr_node->n_node.lock();
     }
 }

@@ -19,7 +19,7 @@ public:
     c_path();
     void add_node(std::shared_ptr<c_node> node);
     void print_path() const;
-    void apply_brownian();
+    void apply_brownian(double scale);
     void apply_split(double split_distance);
     void apply_attraction_repulsion(double att_rep_crossing, double low_thresh, double high_thresh);
     void apply_alignment(double aligment_force);

@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
         printf("Path contains %d nodes\n", (int)path.m_nodes.size());
 
         /* Path operations */
-        path.apply_brownian();
+        path.apply_brownian(0.1);
         path.apply_attraction_repulsion(zero_cross, lower_force_radius, upper_force_radius);
         //path.apply_alignment(0.9);
         path.update_path();
