@@ -109,10 +109,10 @@ void dg::c_path::apply_alignment(double aligment_force)
         /* Apply aligment "force" */
         if(prev_node != nullptr && next_node != nullptr)
         {
-            dg::pt2 midpoint = dg::nodes_midpoint(*prev_node, *next_node);
-            dg::pt2 attraction = dg::lerp_diff(curr_node->curr_pos, midpoint, 0.55);
-            curr_node->next_pos.x += attraction.x;
-            curr_node->next_pos.y += attraction.y;
+            pt2 midpoint = pts_midpoint(prev_node->next_pos, next_node->next_pos);
+            pt2 direction = get_force_dir(curr_node->next_pos, midpoint);
+            curr_node->next_pos.x += aligment_force * direction.x;
+            curr_node->next_pos.y += aligment_force * direction.y;
         }
 
         if(next_node == nullptr)
