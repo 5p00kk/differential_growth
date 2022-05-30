@@ -13,6 +13,11 @@ int main(int argc, char const *argv[])
     dg::c_path path;
     dg::c_visualizer visualizer;
     const int output_dim = 700;
+    const double zero_cross = 4.0;
+    const double lower_force_radius = 2.0;
+    const double upper_force_radius = 10.0;
+    const double pruning_radius = 2.0;
+    const double split_length = 10.0;
     
     c_recorder m_recorder;
     m_recorder.new_recording(output_dim, output_dim, "");
