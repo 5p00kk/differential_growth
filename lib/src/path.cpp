@@ -238,8 +238,7 @@ void dg::c_path::update_path()
     std::shared_ptr<c_node> curr_node = m_first_node;
     while(curr_node != nullptr)
     {
-        curr_node->curr_pos.x = curr_node->next_pos.x;
-        curr_node->curr_pos.y = curr_node->next_pos.y;
+        curr_node->update_position();
         curr_node = curr_node->n_node.lock();
     }
 }
