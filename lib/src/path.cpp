@@ -145,9 +145,11 @@ void dg::c_path::apply_attraction_repulsion(double att_rep_crossing, double low_
 
         const size_t n_matches = m_search_index.radiusSearch(&query_pt[0], search_radius, ret_matches, params);
 
+        dg::pt2 cumulative_force{};
         for (size_t i=0; i<n_matches; i++)
         {
             size_t match_idx = ret_matches[i].first;
+            dg::pt2 force{};
 
             if(m_nodes[match_idx] == curr_node)
                 continue;
@@ -158,21 +160,17 @@ void dg::c_path::apply_attraction_repulsion(double att_rep_crossing, double low_
             if(sqrt(ret_matches[i].second) > high_thresh)
                 continue;
 
-            dg::pt2 force{};
-            if(sqrt(ret_matches[i].second) > att_rep_crossing)
-            {
-                force = dg::get_force(curr_node->curr_pos, m_nodes[match_idx]->curr_pos, att_rep_crossing);
-            }
-            else
-            {
-                force = dg::get_force_dir(curr_node->curr_pos, m_nodes[match_idx]->curr_pos);
-                force.x *= -1 * (sqrt(ret_matches[i].second) - att_rep_crossing);
-                force.y *= -1 * (sqrt(ret_matches[i].second) - att_rep_crossing);
-            }
+            force = dg::get_force(curr_node->curr_pos, m_nodes[match_idx]->curr_pos, att_rep_crossing);
 
-            curr_node->next_pos.x += force.x;
-            curr_node->next_pos.y += force.y;
+            cumulative_force.x += force.x;
+            cumulative_force.y += force.y;
         }
+        
+        cumulative_force.x = std::max(std::min(cumulative_force.x, 1.0), -1.0);
+        cumulative_force.y = std::max(std::min(cumulative_force.y, 1.0), -1.0);
+        
+        curr_node->next_pos.x += cumulative_force.x;
+        curr_node->next_pos.y += cumulative_force.y;
 
         curr_node = curr_node->n_node.lock();
     }
