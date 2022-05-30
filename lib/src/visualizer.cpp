@@ -14,9 +14,8 @@ void dg::c_visualizer::visualize(const std::shared_ptr<dg::c_node> first_node, c
         return;
     }
 
-    /* TODO get this size from somewhere */
     /* Clear the array */
-    output_mat = cv::Mat::zeros(900, 900, CV_8UC1);
+    output_mat = cv::Mat::zeros(output_mat.rows, output_mat.cols, CV_8UC1);
 
     /* Draw lines */
     std::shared_ptr<c_node> curr_node = first_node;
