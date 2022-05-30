@@ -5,6 +5,7 @@ add_library(diffgrowth_lib
     src/node.cpp
     src/path.cpp
     src/visualizer.cpp
+    src/recorder.cpp
 )
 
 target_include_directories(diffgrowth_lib PUBLIC

@@ -3,6 +3,7 @@
 #include "node.h"
 #include "path.h"
 #include "visualizer.h"
+#include "recorder.h"
 #include <opencv2/highgui/highgui.hpp>
 
 int main(int argc, char const *argv[])
@@ -12,6 +13,10 @@ int main(int argc, char const *argv[])
     dg::c_path path;
     dg::c_visualizer visualizer;
     const int output_dim = 700;
+    
+    c_recorder m_recorder;
+    m_recorder.new_recording(output_dim, output_dim, "");
+    
     
     cv::Mat output_image = cv::Mat::zeros(output_dim, output_dim, CV_8UC1);
     cv::Mat cumulative = cv::Mat::zeros(output_dim, output_dim, CV_8UC1);
@@ -40,6 +45,11 @@ int main(int argc, char const *argv[])
         /* Visualize */
         visualizer.visualize(path.m_first_node, output_image);
         cumulative = (output_image/255)+cumulative;
+        
+        if(step%5 == 0)
+        {
+            m_recorder.video_add_frame(output_image);
+        }
         cv::imshow("cumulative", cumulative);
         cv::imshow("output", output_image);
         cv::waitKey(1);
@@ -48,5 +58,6 @@ int main(int argc, char const *argv[])
     cv::imwrite("cumulative.png", cumulative);
     cv::imwrite("output.png", output_image);
 
+    m_recorder.stop_recording();
     return 0;
 }
