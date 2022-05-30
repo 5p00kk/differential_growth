@@ -11,14 +11,10 @@ int main(int argc, char const *argv[])
     
     dg::c_path path;
     dg::c_visualizer visualizer;
-    const double zero_cross = 4.0;
-    const double lower_force_radius = 4.5;
-    const double upper_force_radius = 10.0;
-    const double pruning_radius = 4.0;
-    const double split_length = 10.0;
-
-    cv::Mat output_image = cv::Mat::zeros(900, 900, CV_8UC1);
-    cv::Mat cumulative = cv::Mat::zeros(900, 900, CV_8UC1);
+    const int output_dim = 700;
+    
+    cv::Mat output_image = cv::Mat::zeros(output_dim, output_dim, CV_8UC1);
+    cv::Mat cumulative = cv::Mat::zeros(output_dim, output_dim, CV_8UC1);
 
     /* Generate initial path (circle) */
     for(double step = 0; step<2*3.14; step+=0.1)
