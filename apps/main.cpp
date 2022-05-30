@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
     {
         double x = 100*sin(step);
         double y = 100*cos(step);
-        path.add_node(std::make_shared<dg::c_node>(450+x, 450+y));
+        path.add_node(std::make_shared<dg::c_node>(350+x, 350+y));
     }
 
     /* Growtih iterate */
