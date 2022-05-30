@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <random>
 
+#define KD_PRUNING
+
 dg::c_path::c_path()
 : m_search_index{2, *this, {10}}
 {
@@ -186,6 +188,21 @@ void dg::c_path::apply_pruning(double min_distance)
         std::shared_ptr<c_node> next_node = curr_node->n_node.lock();
         std::shared_ptr<c_node> prev_node = curr_node->p_node.lock();
 
+#ifdef KD_PRUNING:
+        if(curr_node != nullptr)
+        {
+            m_search_index.buildIndex();
+            const double query_pt[2] = {curr_node->curr_pos.x, curr_node->curr_pos.y};
+            const double search_radius = min_distance*min_distance;
+            std::vector<std::pair<uint32_t, double>> ret_matches;
+            nanoflann::SearchParams params;
+            const size_t n_matches = m_search_index.radiusSearch(&query_pt[0], search_radius, ret_matches, params);
+            if(n_matches>1)
+            {
+                flag_remove = true;
+            }
+        }
+#else
         if(prev_node != nullptr && dg::node_distance(*curr_node, *prev_node) < min_distance)
         {
             flag_remove = true;
@@ -195,6 +212,7 @@ void dg::c_path::apply_pruning(double min_distance)
         {
             flag_remove = true;
         }
+#endif 
 
         if(flag_remove)
         {
