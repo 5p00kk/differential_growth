@@ -37,8 +37,6 @@ int main(int argc, char const *argv[])
     /* Growtih iterate */
     for(int step=0; step<10000; step++)    
     {
-        printf("Path contains %d nodes\n", (int)path.m_nodes.size());
-
         /* Path operations */
         path.apply_brownian(0.1);
         path.apply_attraction_repulsion(zero_cross, lower_force_radius, upper_force_radius);
