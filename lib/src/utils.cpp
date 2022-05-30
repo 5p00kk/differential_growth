@@ -52,11 +52,20 @@ dg::pt2 dg::get_force(const dg::pt2& first, const dg::pt2& second, double zero_p
 
 dg::pt2 dg::get_force_dir(const dg::pt2& first, const dg::pt2& second)
 {
-    double distance = sqrt(pow(first.x - second.x,2)+pow(first.y - second.y,2));
-
     dg::pt2 retval{};
-    retval.x = ((second.x - first.x) / distance);
-    retval.y = ((second.y - first.y) / distance);
 
+    double distance = sqrt(pow(first.x - second.x,2)+pow(first.y - second.y,2));
+    
+    if(abs(distance) < 1e-6)
+    {
+        retval.x = 0;
+        retval.y = 0;
+    }
+    else
+    {
+        retval.x = ((second.x - first.x) / distance);
+        retval.y = ((second.y - first.y) / distance);
+    }
+    
     return retval;
 }
