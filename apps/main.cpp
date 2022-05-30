@@ -46,6 +46,11 @@ int main(int argc, char const *argv[])
         visualizer.visualize(path.m_first_node, output_image);
         cumulative = (output_image/255)+cumulative;
         
+        if(step%100 == 0)
+        {
+            printf("Step: %d\n", step);
+        }
+
         if(step%5 == 0)
         {
             m_recorder.video_add_frame(output_image);
